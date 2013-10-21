@@ -9,7 +9,8 @@ module AnnotateModels
 
   # File.join for windows reverse bar compat?
   # I dont use windows, can`t test
-  UNIT_TEST_DIR         = File.join("test", "unit")
+  RAILS_3_UNIT_TEST_DIR = File.join("test", "unit")
+  RAILS_4_UNIT_TEST_DIR = File.join("test", "models")
   SPEC_MODEL_DIR        = File.join("spec", "models")
   FIXTURE_TEST_DIR      = File.join("test", "fixtures")
   FIXTURE_SPEC_DIR      = File.join("spec", "fixtures")
@@ -31,8 +32,9 @@ module AnnotateModels
   FABRICATORS_SPEC_DIR  = File.join("spec", "fabricators")
 
   TEST_PATTERNS = [
-    [UNIT_TEST_DIR,  "%MODEL_NAME%_test.rb"],
-    [SPEC_MODEL_DIR, "%MODEL_NAME%_spec.rb"],
+    [RAILS_3_UNIT_TEST_DIR,  "%MODEL_NAME%_test.rb"],
+    [RAILS_4_UNIT_TEST_DIR,  "%MODEL_NAME%_test.rb"],
+    [SPEC_MODEL_DIR,         "%MODEL_NAME%_spec.rb"],
   ]
 
   FIXTURE_PATTERNS = [
@@ -124,7 +126,7 @@ module AnnotateModels
         else
           if (col.limit)
             if col.limit.is_a? Array
-              attrs << "(#{col.limit.join(', ')})" 
+              attrs << "(#{col.limit.join(', ')})"
             else
               col_type << "(#{col.limit})" unless NO_LIMIT_COL_TYPES.include?(col_type)
             end
